@@ -6,7 +6,6 @@ export default function Layout({ children }) {
     <>
       <Header />
       <div className="mx-8 md:mx-20">{children}</div>
-
       <Footer />
     </>
   );
