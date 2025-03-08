@@ -1,13 +1,15 @@
-import './App.css'
-import Layout from './layouts/Layout'
+import "./App.css";
+import ThemeProvider from "./Contexts/ThemeProvider";
+import Layout from "./layouts/Layout";
 
 function App() {
-
   return (
-    <Layout>
-      <h3>home</h3>
-    </Layout>
-  )
+    <ThemeProvider>
+      <Layout>
+        <h3>home</h3>
+      </Layout>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
