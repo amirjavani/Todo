@@ -3,6 +3,7 @@ import Todo from "../components/Todo";
 
 const TodoList = () => {
   const date = new Date();
+  
 
   return (
     <main className="border rounded ">
@@ -12,14 +13,7 @@ const TodoList = () => {
       </div>
       <div className="flex flex-col mx-10 p-2 my-2 divide-y divide-gray-400">
         <Todo title="task1" />
-        <Todo title="task2" />
-        <Todo title="task2" />
-        <Todo title="task2" />
-        <Todo title="task2" />
-        <Todo title="task2" />
-        <Todo title="task2" />
-        <Todo title="task2" />
-        <Todo title="task2" />
+        <Todo title="task1" />
       </div>
       <button className="flex cursor-pointer flex-row mx-10 my-2 items-center p-2 rounded-3xl bg-green-600 hover:bg-green-700 active:text-[#232c40] text-lg "><MdAdd/>Add</button>
     </main>
