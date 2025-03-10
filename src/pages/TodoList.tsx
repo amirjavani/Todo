@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "../components/Modal";
 
-interface todo{
+export interface todo{
     id:number,
     title:string
 }
@@ -13,6 +13,8 @@ const TodoList = () => {
   const date = new Date();
 
   const [todosList, setTodosList] = useState<todo[]>();
+  const [selectedTodo, setSelectedTodo] = useState<todo>();
+  
   const [showModal, setShowModal] = useState(false);
   const [status, setStatus] = useState<'create'|'edit'|'delete'>('create');
 
@@ -24,14 +26,50 @@ const TodoList = () => {
       console.log("Errorr : " + error);
     }
   };
+  const createTodo = async (title:string) => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/tasks",{title:title});
+      setTodosList(res.data);
+    } catch (error) {
+      console.log("Error : " + error);
+    }
+  };
+  const editTodo = async (newTitle:string,id:number) => {
+    try {
+      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`,{title:newTitle});
+      setTodosList(res.data);
+    } catch (error) {
+      console.log("Errorr : " + error);
+    }
+  };
+  const deleteTodo = async (id:number) => {
+    try {
+      const res = await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      setTodosList(res.data);
+    } catch (error) {
+      console.log("Erorr : " + error);
+    }
+  };
 
   useEffect(() => {
     fetchTodoList();
   }, []);
 
-  const showModalHandeler = (st:'create'|'edit'|'delete',id:number)=>{
+  const showModalHandeler = (st:'create'|'edit'|'delete',t:todo|undefined)=>{
     setStatus(st);
+    setSelectedTodo(t)
     setShowModal(true);
+  }
+
+
+  const submitModalHandler = async(t:todo)=>{
+    if (status== 'create') {
+        await createTodo(t.title);
+    }else if (status== 'edit'){
+        await editTodo(t.title,t.id)
+    }else{
+        await deleteTodo(t.id)
+    }
   }
 
   console.log(status)
@@ -49,11 +87,11 @@ const TodoList = () => {
           <Todo title={item.title} id={item.id} showModalHandeler={showModalHandeler} />
         ))}
       </div>
-      <button className="flex cursor-pointer flex-row mx-10 my-2 items-center p-2 rounded-3xl bg-green-600 hover:bg-green-700 active:text-[#232c40] text-lg ">
+      <button onClick={()=>{showModalHandeler('create',undefined)}} className="flex cursor-pointer flex-row mx-10 my-2 items-center p-2 rounded-3xl bg-green-600 hover:bg-green-700 active:text-[#232c40] text-lg ">
         <MdAdd />
         Add
       </button>
-      {showModal && <Modal status={status} closeModal={setShowModal}/>}
+      {showModal && <Modal id={selectedTodo?.id} onSubmit={submitModalHandler} status={status} closeModal={setShowModal}/>}
     </main>
   );
 };

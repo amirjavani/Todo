@@ -18,7 +18,7 @@ const createTask = (req, res) => {
         return res.status(400).json({ message: "عنوان الزامی است" });
     }
     const newTask = {
-        id: tasks.length + 1,
+        id: tasks[tasks.length - 1].id + 1,
         title,
     };
     tasks.push(newTask);
