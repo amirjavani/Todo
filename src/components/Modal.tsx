@@ -37,7 +37,7 @@ function Modal({
         <p className="text-xl">{status}</p>
         {status != "delete" ? (
           <input
-           className="p-1 text-[16px] mx-1 my-5 border  "
+           className="p-1 text-[16px] mx-1 my-5 border  rounded"
             placeholder="new task"
             onChange={(e) => setInput(e.target.value)}
             value={input}
