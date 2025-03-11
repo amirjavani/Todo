@@ -33,7 +33,7 @@ function Modal({
       onClick={() => closeModal()}>
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`w-3/4 md:w-1/4 ${theme?.theme=='dark'?'bg-[#3d465a]':'bg-white'}  flex flex-col text-center m-auto mt-60 rounded-lg p-3`}>
+        className={`w-3/4 md:w-2/4 xl:w-2/6 ${theme?.theme=='dark'?'bg-[#3d465a]':'bg-white'}  flex flex-col text-center m-auto mt-60 rounded-lg p-3`}>
         <p className="text-xl">{status}</p>
         {status != "delete" ? (
           <input
