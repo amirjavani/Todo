@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import  { useContext, useEffect, useRef, useState } from "react";
 import { todo } from "../pages/TodoList";
 import { ThemeContext } from "../Contexts/ThemeProvider";
 
@@ -30,7 +30,7 @@ function Modal({
 
   return (
     <div
-      className="bg-black/50 text-center inset-0  absolute  "
+      className="bg-black/50 text-center inset-0  fixed   "
       onClick={() => closeModal()}>
       <div
         onClick={(e) => e.stopPropagation()}
@@ -47,9 +47,9 @@ function Modal({
             value={input}
           />
         ) : (
-          <div className="mx-1 my-5">
+          <div className="mx-1 my-5 ">
             Do you want to delete{" "}
-            <span className="font-bold">{todo.title}</span> ?
+            <span className="font-bold ">{todo.title}</span> ?
           </div>
         )}
         <div className="flex flex-row gap-1 w-full rounded   ">

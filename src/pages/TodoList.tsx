@@ -81,7 +81,7 @@ const TodoList = () => {
   };
 
   return (
-    <main className="border rounded ">
+    <main className="border rounded  ">
       <div className="flex flex-row  justify-between p-5 ">
         <h2 className="font-bold text-2xl md:text-4xl ">Today</h2>
         <span className="text-sm md:text-[20px] my-auto">
