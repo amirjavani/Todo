@@ -29,7 +29,7 @@ const TodoList = () => {
   const createTodo = async (title:string) => {
     try {
       const res = await axios.post("http://localhost:5000/api/tasks",{title:title});
-      setTodosList(res.data);
+      closeModalHandler()
     } catch (error) {
       console.log("Error : " + error);
     }
@@ -37,7 +37,8 @@ const TodoList = () => {
   const editTodo = async (newTitle:string,id:number) => {
     try {
       const res = await axios.put(`http://localhost:5000/api/tasks/${id}`,{title:newTitle});
-      setTodosList(res.data);
+      closeModalHandler()
+        
     } catch (error) {
       console.log("Errorr : " + error);
     }
@@ -45,7 +46,7 @@ const TodoList = () => {
   const deleteTodo = async (id:number) => {
     try {
       const res = await axios.delete(`http://localhost:5000/api/tasks/${id}`);
-      setTodosList(res.data);
+      closeModalHandler()
     } catch (error) {
       console.log("Erorr : " + error);
     }
@@ -72,6 +73,11 @@ const TodoList = () => {
     }
   }
 
+  const closeModalHandler = ()=>{
+    setShowModal(false)
+    fetchTodoList()
+  }
+
   console.log(status)
 
   return (
@@ -84,14 +90,14 @@ const TodoList = () => {
       </div>
       <div className="flex flex-col mx-10 p-2 my-2 divide-y divide-gray-400">
         {todosList?.map((item) => (
-          <Todo title={item.title} id={item.id} showModalHandeler={showModalHandeler} />
+          <Todo todo={item} showModalHandeler={showModalHandeler} />
         ))}
       </div>
       <button onClick={()=>{showModalHandeler('create',undefined)}} className="flex cursor-pointer flex-row mx-10 my-2 items-center p-2 rounded-3xl bg-green-600 hover:bg-green-700 active:text-[#232c40] text-lg ">
         <MdAdd />
         Add
       </button>
-      {showModal && <Modal id={selectedTodo?.id} onSubmit={submitModalHandler} status={status} closeModal={setShowModal}/>}
+      {showModal && <Modal todo={selectedTodo} onSubmit={submitModalHandler} status={status} closeModal={setShowModal}/>}
     </main>
   );
 };
