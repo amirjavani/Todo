@@ -14,18 +14,18 @@ function Header() {
         <img className="h-[80%] p-3" src={logo} alt="logo" />
         <p className="font-bold text-xl md:text-3xl">TODO</p>
       </div>
-      <div className="text-[black] flex gap-1 p-0.5 flex-row my-auto mr-5 items-center text-2xl hover:cursor-pointer bg-blue-50 rounded-3xl">
+      <div className={`${theme?.theme=='dark'?'bg-[#3d465a]':'bg-blue-50'} text-[black] flex gap-1 p-0.5 flex-row my-auto mr-5 items-center text-2xl hover:cursor-pointer  rounded-3xl`}>
         <MdOutlineDarkMode
           onClick={() => theme?.setTheme('dark')}
           className={`${
-            theme?.theme == "dark" ? "text-white bg-blue-300" : ""
+            theme?.theme == "dark" ? "text-[#3d465a] bg-blue-300" : ""
           }  text-2xl md:text-4xl bg-blue-50 hover:bg-blue-300 hover:text-white active:bg-blue-400 transition  rounded-3xl p-1`}
         />
         <MdOutlineLightMode
           onClick={() => theme?.setTheme("light")}
           className={`${
-            theme?.theme == "light" ? "text-white bg-blue-300" : ""
-          } text-2xl md:text-4xl bg-blue-50 hover:bg-blue-300 hover:text-white active:bg-blue-400 transition  rounded-3xl p-1`}
+            theme?.theme == "light" ? " bg-blue-300" : ""
+          } text-2xl md:text-4xl text-white hover:bg-blue-300 hover:text-white active:bg-blue-400 transition  rounded-3xl p-1`}
         />
       </div>
     </header>
