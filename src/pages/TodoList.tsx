@@ -88,7 +88,7 @@ const TodoList = () => {
           {date.toISOString().split("T")[0]}
         </span>
       </div>
-      <div className="flex flex-col mx-10 p-2 my-2 divide-y divide-gray-400">
+      <div className="flex flex-col mx-10 p-2 my-2 divide-y  divide-gray-400 overflow-auto">
         {todosList?.map((item) => (
           <Todo todo={item} showModalHandeler={showModalHandeler} />
         ))}
@@ -97,7 +97,7 @@ const TodoList = () => {
         <MdAdd />
         Add
       </button>
-      {showModal && <Modal todo={selectedTodo} onSubmit={submitModalHandler} status={status} closeModal={setShowModal}/>}
+      {showModal && <Modal todo={selectedTodo} onSubmit={submitModalHandler} status={status} closeModal={closeModalHandler}/>}
     </main>
   );
 };
