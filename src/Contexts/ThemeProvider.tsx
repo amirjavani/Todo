@@ -1,4 +1,4 @@
-import { createContext, useState , ReactNode ,Dispatch, SetStateAction } from "react";
+import { createContext, useState , ReactNode ,Dispatch, SetStateAction, useEffect } from "react";
 
 
 export interface ThemeContextType{
@@ -9,7 +9,11 @@ export interface ThemeContextType{
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 function ThemeProvider({ children } : { children: ReactNode }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">((localStorage.getItem("theme") as "light" | "dark") ?? "dark");
+
+  useEffect(() => {
+    localStorage.setItem('theme',theme)
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>

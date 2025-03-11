@@ -90,7 +90,7 @@ const TodoList = () => {
       </div>
       <div className="flex flex-col mx-5 md:mx-10 p-2 my-2 divide-y  divide-gray-400 overflow-auto">
         {todosList?.map((item) => (
-          <Todo todo={item} showModalHandeler={showModalHandeler} />
+          <Todo key={item.id} todo={item} showModalHandeler={showModalHandeler} />
         ))}
       </div>
       <button

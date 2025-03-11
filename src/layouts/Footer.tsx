@@ -18,7 +18,7 @@ function Footer() {
         </Link>
       </div>
 
-      <span>© 2025 TODO</span>
+      <span>© 2025 TODO amir javani</span>
     </footer>
   );
 }

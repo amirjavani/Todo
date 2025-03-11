@@ -7,7 +7,7 @@ function Todo({ todo , showModalHandeler}:{todo:todo,showModalHandeler:(status:'
 
     return (
     <div className="flex flex-row justify-between  p-2 hover:bg-blue-300/10 text-lg md:text-xl">
-        <p className="">{todo.title}</p>
+        <p className="overflow-hidden overflow-ellipsis">{todo.title}</p>
         <div className="flex flex-row gap-3 text-2xl md:text-3xl my-auto">
             <MdEdit onClick={()=>showModalHandeler('edit',todo)} className="p-1 cursor-pointer active:text-[#232c40] hover:bg-blue-300/50 rounded-2xl " />
             <MdDelete onClick={()=>showModalHandeler('delete',todo)} className="p-1 cursor-pointer active:text-[#ab4343] hover:bg-blue-300/50 rounded-2xl text-red-400"/>
