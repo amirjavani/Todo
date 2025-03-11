@@ -1,12 +1,13 @@
 import { MdAdd } from "react-icons/md";
 import Todo from "../components/Todo";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import Modal from "../components/Modal";
 
-export interface todo{
-    id:number,
-    title:string
+import Modal from "../components/Modal";
+import { createTodo, deleteTodo, editTodo, fetchTodoList } from "../utility/TodoAPIs";
+
+export interface todo {
+  id: number;
+  title: string;
 }
 
 const TodoList = () => {
@@ -14,71 +15,70 @@ const TodoList = () => {
 
   const [todosList, setTodosList] = useState<todo[]>();
   const [selectedTodo, setSelectedTodo] = useState<todo>();
-  
-  const [showModal, setShowModal] = useState(false);
-  const [status, setStatus] = useState<'create'|'edit'|'delete'>('create');
 
-  const fetchTodoList = async () => {
+  const [showModal, setShowModal] = useState(false);
+  const [status, setStatus] = useState<"create" | "edit" | "delete">("create");
+
+  const fetchTodoListHandler = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/tasks");
-      setTodosList(res.data);
+      const res = await fetchTodoList();
+      setTodosList(res);
     } catch (error) {
       console.log("Errorr : " + error);
     }
   };
-  const createTodo = async (title:string) => {
+  const createTodoHandler = async (title: string) => {
     try {
-      const res = await axios.post("http://localhost:5000/api/tasks",{title:title});
-      closeModalHandler()
+      await createTodo(title);
+      closeModalHandler();
     } catch (error) {
       console.log("Error : " + error);
     }
   };
-  const editTodo = async (newTitle:string,id:number) => {
+  const editTodoHandler = async (newTitle: string, id: number) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`,{title:newTitle});
-      closeModalHandler()
-        
+      await editTodo(newTitle,id)
+      closeModalHandler();
     } catch (error) {
       console.log("Errorr : " + error);
     }
   };
-  const deleteTodo = async (id:number) => {
+  const deleteTodoHandler = async (id: number) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/api/tasks/${id}`);
-      closeModalHandler()
+      await deleteTodo(id);
+      closeModalHandler();
     } catch (error) {
       console.log("Erorr : " + error);
     }
   };
 
   useEffect(() => {
-    fetchTodoList();
+    fetchTodoListHandler();
   }, []);
 
-  const showModalHandeler = (st:'create'|'edit'|'delete',t:todo|undefined)=>{
+  const showModalHandeler = (
+    st: "create" | "edit" | "delete",
+    t: todo | undefined
+  ) => {
     setStatus(st);
-    setSelectedTodo(t)
+    setSelectedTodo(t);
     setShowModal(true);
-  }
+  };
 
-
-  const submitModalHandler = async(t:todo)=>{
-    if (status== 'create') {
-        await createTodo(t.title);
-    }else if (status== 'edit'){
-        await editTodo(t.title,t.id)
-    }else{
-        await deleteTodo(t.id)
+  const submitModalHandler = async (t: todo) => {
+    if (status == "create") {
+      await createTodoHandler(t.title);
+    } else if (status == "edit") {
+      await editTodoHandler(t.title, t.id);
+    } else {
+      await deleteTodoHandler(t.id);
     }
-  }
+  };
 
-  const closeModalHandler = ()=>{
-    setShowModal(false)
-    fetchTodoList()
-  }
-
-  console.log(status)
+  const closeModalHandler = () => {
+    setShowModal(false);
+    fetchTodoListHandler();
+  };
 
   return (
     <main className="border rounded ">
@@ -93,11 +93,22 @@ const TodoList = () => {
           <Todo todo={item} showModalHandeler={showModalHandeler} />
         ))}
       </div>
-      <button onClick={()=>{showModalHandeler('create',undefined)}} className="flex cursor-pointer flex-row mx-10 my-2 items-center p-2 rounded-3xl bg-green-600 hover:bg-green-700 active:text-[#232c40] text-sm md:text-lg ">
+      <button
+        onClick={() => {
+          showModalHandeler("create", undefined);
+        }}
+        className="flex cursor-pointer flex-row mx-10 my-2 items-center p-2 rounded-3xl bg-green-600 hover:bg-green-700 active:text-[#232c40] text-sm md:text-lg ">
         <MdAdd />
         Add
       </button>
-      {showModal && <Modal todo={selectedTodo} onSubmit={submitModalHandler} status={status} closeModal={closeModalHandler}/>}
+      {showModal && (
+        <Modal
+          todo={selectedTodo}
+          onSubmit={submitModalHandler}
+          status={status}
+          closeModal={closeModalHandler}
+        />
+      )}
     </main>
   );
 };
