@@ -1,54 +1,66 @@
-# React + TypeScript + Vite
+# 📌 Todo Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and responsive **Todo web application** built with **React** and a **mocked backend using Node.js**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features  
 
-## Expanding the ESLint configuration
+✅ **Dark Mode & Light Mode**  
+- Implemented using the **Context API**.  
+- User preference is **saved in `localStorage`** for persistence.  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+✅ **CRUD Operations**  
+- Create, Read, Update, and Delete tasks seamlessly.  
+- Data is managed via a **mocked backend in Node.js**.  
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+✅ **Responsive Design**  
+- Fully optimized for **mobile, tablet, and desktop** screens.  
+- Styled using **Tailwind CSS** for a sleek UI.  
+
+✅ **Custom Modal for CRUD**  
+- A **self-implemented modal** is used for handling task actions.  
+- Prevents unnecessary page reloads and improves UX.  
+
+---
+
+## 📦 Tech Stack  
+
+- **Frontend:** React.js, TypeScript, Context API, Tailwind CSS  
+- **Backend:** Node.js (mocked API)  
+- **State Management:** React Hooks  
+- **Storage:** LocalStorage (for theme persistence)  
+
+---
+
+## 🛠 Installation & Setup  
+
+### 1️⃣ Clone the Repository  
+```sh
+git clone https://github.com/yourusername/todo-app.git
+cd todo-app
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2️⃣ Install Dependencies
+```sh
+npm install
 ```
+### 3️⃣ Run the Frontend
+```sh
+npm run dev
+```
+### 4️⃣ Run the Mocked Backend
+```sh
+cd backend
+npm install
+node server.js
+```
+---
+
+## 📸 Screenshots
+
+| Light Mode  | Dark Mode  |
+|-------------|------------|
+| ![todo-lightmode](https://github.com/user-attachments/assets/71b8e2ae-590d-4e10-9abd-2f70a512be9a) |![todo-darkmode](https://github.com/user-attachments/assets/73c413d7-8073-486d-b80d-a507c800f235)|
+
+
+
